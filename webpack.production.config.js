@@ -1,7 +1,7 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
-    devtool: 'eval-source-map',
+    devtool: 'null', //注意修改了这里，这能大大压缩我们的打包代码
     entry: __dirname + "/app/main.js",//已多次提及的唯一入口文件
     output: {
         path: __dirname + "/build",//打包后的文件存放的地方
