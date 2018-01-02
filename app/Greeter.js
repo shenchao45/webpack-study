@@ -1,14 +1,14 @@
 // Greeter.js
 import React from 'react'
-import config from './config'
-import styles from './Greeter.css';//导入
+import { Switch } from 'antd';
 
 export default class Greeter extends React.Component {
     render() {
         return (
-            <div className={styles.root}>
-                {config.greetText}
-            </div>
+               <div>
+                   <h1>haha</h1>
+                   <Switch />
+               </div>
         )
     }
 }
