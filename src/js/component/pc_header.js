@@ -45,7 +45,8 @@ class PCHeader extends React.Component {
         fetch("http://newsapi.gugujiankong.com/Handler.ashx?action=register&username=userName&password=password&r_userName="+formData.r_userName+"&r_password="+formData.r_password+"&r_confirmPassword="+formData.r_confirmPassword,myFetchOptions).
         then(response=>response.json()).then(json=>{
             this.setState({userNickName:json.NickUserName,userid:json.UserId});
-
+            localStorage.userid= json.UserId;
+            localStorage.userNickName = json.NickUserName;
         });
         message.success("请求成功！");
         this.setModalVisible(false);
@@ -106,7 +107,7 @@ class PCHeader extends React.Component {
                         </Menu>
                         <Modal title={'用户中心'} wrapClassName="vertical-center-modal"
                                visible={this.state.modalVisible}
-                               onOk={() => this.setModalVisible(false)}
+                               onOk={() => this.setModalVisible(false)} cancelText={'确定'}
                                onCancel={() => this.setModalVisible(false)} okText={'关闭'}>
                             <Tabs type={'card'}>
                                 <TabPane tab={'注册'} key={"2"}>
@@ -116,7 +117,23 @@ class PCHeader extends React.Component {
                                         </FormItem>
                                         <FormItem label={'密码'}>
                                             <Input type={'password'}
-                                                   placeholder={'请输入您的密码'} {...getFieldProps('r_userPassword')}/>
+                                                   placeholder={'请输入您的密码'} {...getFieldProps('r_password')}/>
+                                        </FormItem>
+                                        <FormItem label={'确认密码'}>
+                                            <Input type={'password'}
+                                                   placeholder={'请再次输入您的密码'} {...getFieldProps('r_confirmPassword')}/>
+                                        </FormItem>
+                                        <Button type={'primary'} htmlType={'submit'}>注册</Button>
+                                    </Form>
+                                </TabPane>
+                                <TabPane tab={'登录'} key={"1"}>
+                                    <Form horizontal="true" onSubmit={this.handleSubmit.bind(this)}>
+                                        <FormItem label={'账户'}>
+                                            <Input placeholder={'请输入您的账号'} {...getFieldProps('r_userName')}/>
+                                        </FormItem>
+                                        <FormItem label={'密码'}>
+                                            <Input type={'password'}
+                                                   placeholder={'请输入您的密码'} {...getFieldProps('r_password')}/>
                                         </FormItem>
                                         <FormItem label={'确认密码'}>
                                             <Input type={'password'}
